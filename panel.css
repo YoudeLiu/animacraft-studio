@@ -1,0 +1,11 @@
+/* panel.css - Styles for the AnimaCraft Studio panel */
+body {
+  font-family: sans-serif;
+  padding: 10px;
+  color: #333;
+}
+
+h1 {
+  color: #1a73e8; /* Google Blue */
+  margin-top: 0;
+} 
