@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Animacraft Studio Integration Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .box { width: 100px; height: 100px; margin: 10px; background-color: green; border-radius: 10px; }
+        #box1 { background-color: dodgerblue; }
+        #box2 { background-color: orange; }
+        #box3 { background-color: purple; }
+    </style>
+</head>
+<body>
+    <h1>GSAP Animacraft Studio Integration Test</h1>
+
+    <p>This page demonstrates the integration of GSAP with a hypothetical 'animacraft-studio' Chrome extension.</p>
+
+    <div id="box1" class="box">Box 1</div>
+    <div id="box2" class="box">Box 2</div>
+    <div id="box3" class="box">Box 3</div>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Animacraft Integration Script -->
+    <!-- In a real build, this would be the compiled JavaScript file -->
+    <script src="animacraft-integration.js"></script> 
+
+    <script>
+        // Wait for GSAP and the integration script to be loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap === 'undefined') {
+                console.error("GSAP is not loaded!");
+                return;
+            }
+            if (typeof initializeAnimacraftSync === 'undefined') {
+                console.error("Animacraft integration script not loaded or initializeAnimacraftSync is not defined!");
+                return;
+            }
+
+            // --- Simulate Extension Presence (for testing) ---
+            // To test the integration without the actual extension, you can uncomment the following lines
+            // in your browser's developer console AFTER the page has loaded:
+            /*
+            console.log("Simulating Animacraft Studio extension presence...");
+            window.animacraftStudioReady = true;
+            document.dispatchEvent(new CustomEvent('animacraftStudioReady')); 
+            // This should trigger the 'initializeAnimacraftSync' in animacraft-integration.js
+            */
+            // You should then see messages in the console about data being sent.
+
+            // --- Example GSAP Animations ---
+            gsap.set(['#box1', '#box2', '#box3'], { x: 0 }); // Initialize position
+
+            // Simple tween for box1
+            gsap.to("#box1", { 
+                x: 300, 
+                rotation: 360, 
+                duration: 2, 
+                repeat: -1, 
+                yoyo: true,
+                ease: "power1.inOut",
+                // You can add an ID here if you want it to be predictable in the extension
+                // id: "box1Tween" 
+            });
+
+            // A timeline for box2 and box3
+            const tl = gsap.timeline({ 
+                repeat: -1, 
+                repeatDelay: 1, 
+                yoyo: true,
+                // id: "mainTimeline" // Assigning an ID to the timeline
+            });
+
+            tl.to("#box2", { x: 400, scale: 1.2, duration: 1.5, ease: "elastic.out(1, 0.5)" })
+              .to("#box3", { y: 100, rotation: -90, duration: 1, ease: "back.inOut(1.7)" }, "-=0.5")
+              .addLabel("bothSpin", "+=0.5")
+              .to(["#box2", "#box3"], { rotation: "+=360", duration: 1 }, "bothSpin");
+
+            console.log("Example GSAP animations created.");
+            console.log("To test, simulate extension presence by running the commented-out code in the console.");
+        });
+    </script>
+</body>
+</html>

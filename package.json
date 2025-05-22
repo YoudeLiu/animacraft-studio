@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/gsap": "^3.0.0",
     "vite-plugin-static-copy": "^3.0.0"
   }
 }
