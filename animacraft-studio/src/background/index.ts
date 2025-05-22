@@ -1,8 +1,8 @@
 // 监听来自 content script 的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('Background received message:', message)
-  // 这里将来会添加消息处理逻辑
   sendResponse({ success: true })
+  return true
 })
 
 // 监听来自 DevTools 面板的消息

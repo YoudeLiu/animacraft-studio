@@ -1,8 +1,4 @@
 interface Window {
-  gsap: typeof import('gsap')
-  __ANIMACRAFT_STUDIO__?: {
-    xstate?: {
-      machines: any[]
-    }
-  }
+  gsap: typeof import('gsap') | undefined
+  __ANIMACRAFT_STUDIO__: boolean
 } 
